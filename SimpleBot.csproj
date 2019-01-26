@@ -142,6 +142,7 @@
     <Compile Include="Persistence\Context\Connection.cs" />
     <Compile Include="Persistence\Repository\Common\Repository.cs" />
     <Compile Include="Persistence\Repository\MessageRep.cs" />
+    <Compile Include="Persistence\Repository\ProfileRep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@ namespace SimpleBot.Persistence.Repository
         public int Total(string user)
         {
             var builder = Builders<BsonDocument>.Filter;
-            var filter = builder.Eq("nome", user);
+            var filter = builder.Eq("name", user);
 
             return Connection._table.Find(filter).ToList().Count;
         }
