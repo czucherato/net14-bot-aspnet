@@ -1,8 +1,6 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+using SimpleBot.Persistence;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SimpleBot.Logic
 {
@@ -10,28 +8,23 @@ namespace SimpleBot.Logic
     {
         public string Reply(SimpleMessage message)
         {
-            string conString = "mongodb://localhost:27017";
-            MongoClient client = new MongoClient(conString);
+            int contador = 0;
 
-            var db = client.GetDatabase("bot");
-            var tb = db.GetCollection<BsonDocument>("transcript");
+            Connection.Open();
 
-            BsonDocument bson = new BsonDocument()
+            BsonDocument document = new BsonDocument()
             {
                 { "id", message.Id },
                 { "nome", message.User },
                 { "mensagem", message.Text }
             };
 
-            tb.InsertOne(bson);
+            Connection.Insert(document);
+
+            int results = Connection.Total(message.User);
+            contador = results + 1;
 
             return $"{message.User} disse '{message.Text}";
         }
-        public static async Task<List<BsonDocument>> GetValues(Task<IAsyncCursor<BsonDocument>> queryTask)
-        {
-            var cursor = await queryTask;
-            return await cursor.ToListAsync<BsonDocument>();
-        }
-
     }
 }
