@@ -16,6 +16,14 @@ namespace SimpleBot.Logic
         {
             int contador = 0;
 
+            this.SetMessage(message);
+            contador = this._rep.Total(message.User) + 1;
+
+            return $"{message.User} disse '{message.Text}";
+        }
+
+        private void SetMessage(SimpleMessage message)
+        {
             BsonDocument document = new BsonDocument()
             {
                 { "id", message.Id },
@@ -24,10 +32,6 @@ namespace SimpleBot.Logic
             };
 
             this._rep.Insert(document);
-
-            contador = this._rep.Total(message.User) + 1;
-
-            return $"{message.User} disse '{message.Text}";
         }
     }
 }
