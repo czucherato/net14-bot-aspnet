@@ -12,14 +12,14 @@ namespace SimpleBot
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        static SimpleBotUser g_bot = null;
+        static SimpleBotDialog g_bot = null;
 
         public MessagesController()
         {
             // Pattern: singleton
             if (g_bot == null)
             {
-                g_bot = new SimpleBotUser();
+                g_bot = new SimpleBotDialog();
             }
         }
 
@@ -42,7 +42,7 @@ namespace SimpleBot
             string userFromId = activity.From.Id;
             string userFromName = activity.From.Name;
 
-            var message = new SimpleMessage(userFromId, userFromName, text);
+            var message = new Message(userFromId, userFromName, text);
 
             string response = g_bot.Reply(message);
 
