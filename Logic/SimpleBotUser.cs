@@ -1,16 +1,20 @@
 ﻿using MongoDB.Bson;
-using SimpleBot.Persistence;
-using System.Collections.Generic;
+using SimpleBot.Persistence.Repository;
 
 namespace SimpleBot.Logic
 {
     public class SimpleBotUser
     {
+        public SimpleBotUser()
+        {
+            this._rep = new MessageRep();
+        }
+
+        private readonly MessageRep _rep;
+
         public string Reply(SimpleMessage message)
         {
             int contador = 0;
-
-            Connection.Open();
 
             BsonDocument document = new BsonDocument()
             {
@@ -19,10 +23,9 @@ namespace SimpleBot.Logic
                 { "mensagem", message.Text }
             };
 
-            Connection.Insert(document);
+            this._rep.Insert(document);
 
-            int results = Connection.Total(message.User);
-            contador = results + 1;
+            contador = this._rep.Total(message.User) + 1;
 
             return $"{message.User} disse '{message.Text}";
         }

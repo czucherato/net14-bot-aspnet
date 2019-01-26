@@ -137,10 +137,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Logic\async.cs" />
     <Compile Include="Logic\SimpleMessage.cs" />
     <Compile Include="Logic\SimpleBotUser.cs" />
-    <Compile Include="Persistence\Connection.cs" />
+    <Compile Include="Persistence\Context\Connection.cs" />
+    <Compile Include="Persistence\Repository\Common\Repository.cs" />
+    <Compile Include="Persistence\Repository\MessageRep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
